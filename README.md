@@ -10,11 +10,14 @@ Utilize vulnerability databases like NVD and CVE
 Generate detailed vulnerability reports with severity levels and remediation steps
 Implement continuous monitoring for ongoing vulnerability identification
 
+## Currently Improving 
+The website and The UI 
+
 # Installation
 
 Install Python 3.x
 Install required libraries:
-Nmap or Scapy (network scanning)
+Nmap (network scanning)
 Safety or Dependency Checker (vulnerability identification)
 
 # Usage
