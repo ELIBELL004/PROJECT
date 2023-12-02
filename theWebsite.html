@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html
+ 
+lang="en">
+
+<head>
+
+    
+<meta
+ 
+charset="UTF-8">
+
+    
+<meta
+ 
+name="viewport"
+ 
+content="width=device-width, initial-scale=1.0">
+
+    
+<title>Vulnerability Scanner</title>
+    <style>
+
+body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .light-mode {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .dark-mode {
+            background-color: #212121;
+            color: #fff;
+        }
+
+        input, button {
+            font-size: 20px;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #network_range {
+            width: 300px;
+        }
+
+        #scan_button {
+            width: 150px;
+        }
+
+        #report {
+            font-size: 16px;
+            width: 600px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="title">Scan Now!</div>
+    <img src="ASCII cat.jpeg" alt="ASCII cat">
+    <label>Dark Mode: </label>
+    <input type="checkbox" id="dark_mode_toggle">
+
+    <input type="text" id="network_range" placeholder="Enter Network Range">
+    <button id="scan_button">Scan Network</button>
+    <div id="report"></div>
+
+    <script>
+        const networkRangeInput = document.getElementById('network_range');
+        const scanButton = document.getElementById('scan_button');
+        const reportElement = document.getElementById('report');
+        const darkModeToggle = document.getElementById('dark_mode_toggle');
+
+        darkModeToggle.addEventListener('change', () => {
+            const bodyElement = document.body;
+            if (darkModeToggle.checked) {
+                bodyElement.classList.remove('light-mode');
+                bodyElement.classList.add('dark-mode');
+            } else {
+                bodyElement.classList.remove('dark-mode');
+                bodyElement.classList.add('light-mode');
+            }
+        });
+
+        scanButton.addEventListener('click', () => {
+            const networkRange = networkRangeInput.value;
+
+            fetch('/scan_network', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ networkRange })
+            }).then(response => response.json())
+                .then(data => {
+                    reportElement.textContent = data.report;
+                });
+        });
+    </script>
+</body>
+</html>
